@@ -4,8 +4,8 @@ in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Emma Lipkowski.
+"""  # done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -47,12 +47,38 @@ def draw_upside_down_wall(rectangle, n, window):
       :type rectangle: rg.Rectangle
       :type n: int
       :type window: rg.RoseWindow
-    and n is nonnegative.
+    and n is non negative.
     """
     # -------------------------------------------------------------------------
     # TODO: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # -------------------------------------------------------------------------
+    # for k in range(rectangle):
+    #   for i in range(n):
+    #       print(i + 1, end='')
+    rect = rectangle.clone()
+    upper_left_x = rect.get_upper_left_corner().x
+    print(upper_left_x)
+    lower_right_x = rect.get_lower_right_corner().x
+    print(lower_right_x)
+    upper_left_y = rect.get_upper_left_corner().y
+    lower_right_y = rect.get_lower_right_corner().y
+    diff_x = rect.get_width()
+    diff_y = rect.get_height()
+    rectangle.attach_to(window)
+    for i in range(n):
+        for j in range(i + 1):
+            rect = rg.Rectangle(rg.Point(upper_left_x, upper_left_y), rg.Point(lower_right_x, lower_right_y))
+            rect.attach_to(window)
+            upper_left_x = upper_left_x + diff_x
+            lower_right_x = lower_right_x + diff_x
+            print('The upper_left_x value is:', upper_left_x)
+            print('The lower_right_x value is:', lower_right_x)
+        upper_left_x = rectangle.get_upper_left_corner().x - ((i + 1) * diff_x / 2)
+        lower_right_x = rectangle.get_lower_right_corner().x - ((i + 1) * diff_x / 2)
+        upper_left_y = rectangle.get_upper_left_corner().y - ((i + 1) * diff_y)
+        lower_right_y = rectangle.get_lower_right_corner().y - ((i + 1) * diff_y)
+    window.render()
 
 
 # -----------------------------------------------------------------------------
